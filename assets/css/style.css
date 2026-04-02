@@ -363,9 +363,6 @@ section:not(#hero) {
   transition: border-color 0.2s;
 }
 
-.timeline-item:last-child {
-  border-bottom: 1px solid var(--border);
-}
 
 .timeline-meta {
   padding-top: 0.2rem;
@@ -394,6 +391,12 @@ section:not(#hero) {
   margin-bottom: 0.75rem;
 }
 
+.edu-header .timeline-org,
+.edu-header .pub-title {
+  margin-bottom: 0;
+}
+
+
 .timeline-desc {
   font-size: 0.92rem;
   color: var(--text-2);
@@ -416,9 +419,6 @@ section:not(#hero) {
   border-top: 1px solid var(--border);
 }
 
-.edu-item:last-child {
-  border-bottom: 1px solid var(--border);
-}
 
 .edu-meta {
   padding-top: 0.2rem;
@@ -442,6 +442,7 @@ section:not(#hero) {
   height: 42px;
   border-radius: 8px;
   flex-shrink: 0;
+  object-fit: contain;
 }
 
 .edu-content h3 {
@@ -484,9 +485,6 @@ section:not(#hero) {
   align-items: start;
 }
 
-.pub-item:last-child {
-  border-bottom: 1px solid var(--border);
-}
 
 .pub-year {
   font-size: 0.75rem;
