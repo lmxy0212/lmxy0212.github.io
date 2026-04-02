@@ -5,6 +5,44 @@
 (function () {
   'use strict';
 
+  /* ---- Splash screen — typewriter + glitch ---- */
+  var splash = document.getElementById('splash');
+  if (splash) {
+    document.body.style.overflow = 'hidden';
+
+    var glitchEl  = splash.querySelector('.splash-glitch');
+    var typedEl   = splash.querySelector('.splash-typed');
+    var subEl     = splash.querySelector('.splash-sub');
+    var fullText  = 'Mackenzie Li';
+    var i = 0;
+
+    function typeNext() {
+      if (i < fullText.length) {
+        typedEl.textContent += fullText[i];
+        glitchEl.setAttribute('data-text', typedEl.textContent);
+        i++;
+        setTimeout(typeNext, 80);
+      } else {
+        // Typing done — show subtitle, pause, then glitch
+        subEl.classList.add('visible');
+        setTimeout(function () {
+          glitchEl.classList.add('glitching');
+        }, 450);
+      }
+    }
+
+    setTimeout(typeNext, 350);
+
+    // Exit after typing (~1260ms) + pause (450ms) + glitch (1300ms) + buffer
+    setTimeout(function () {
+      splash.classList.add('hide');
+      setTimeout(function () {
+        document.body.style.overflow = '';
+        splash.remove();
+      }, 600);
+    }, 3200);
+  }
+
   /* ---- Nav: add .scrolled class on scroll ---- */
   const nav = document.getElementById('nav');
 

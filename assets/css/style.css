@@ -265,7 +265,6 @@ em {
 
 section:not(#hero) {
   padding: 7rem 0;
-  border-top: 1px solid var(--border);
 }
 
 .section-label {
@@ -669,4 +668,141 @@ footer {
   .nav-inner {
     padding: 0 1rem;
   }
+}
+
+/* ============================================================
+   Splash Screen — Typewriter + Glitch
+   ============================================================ */
+
+#splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease, filter 0.5s ease, transform 0.5s ease;
+}
+
+#splash.hide {
+  opacity: 0;
+  filter: blur(10px) brightness(2.5);
+  transform: scale(1.06);
+}
+
+.splash-inner {
+  text-align: center;
+}
+
+/* --- Heading & cursor --- */
+.splash-glitch {
+  position: relative;
+  font-size: clamp(2.8rem, 9vw, 6rem);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+}
+
+.splash-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.85em;
+  background: var(--text);
+  margin-left: 4px;
+  vertical-align: middle;
+  position: relative;
+  top: -0.05em;
+  animation: cursorBlink 0.65s step-end infinite;
+}
+
+.splash-glitch.glitching .splash-cursor {
+  display: none;
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+
+/* --- Glitch ghost layers --- */
+.splash-glitch::before,
+.splash-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.splash-glitch::before { color: #ff0040; }
+.splash-glitch::after  { color: #00ffff; }
+
+.splash-glitch.glitching {
+  animation: glitchMain 1.3s steps(1) forwards;
+}
+
+.splash-glitch.glitching::before {
+  animation: glitchRed  1.3s steps(1) forwards;
+}
+
+.splash-glitch.glitching::after {
+  animation: glitchCyan 1.3s steps(1) forwards;
+}
+
+@keyframes glitchMain {
+  0%, 19%  { transform: translate(0); }
+  20%      { transform: translate(-3px, 1px) skewX(-2deg); }
+  21%      { transform: translate(2px, -1px); }
+  22%, 49% { transform: translate(0); }
+  50%      { transform: translate(4px, 1px) skewX(1.5deg); }
+  51%      { transform: translate(-2px); }
+  52%, 74% { transform: translate(0); }
+  75%      { transform: translate(-4px, 2px) skewX(-3deg); }
+  76%      { transform: translate(3px, -2px) skewX(2deg); }
+  77%      { transform: translate(-1px, 1px); }
+  78%, 100%{ transform: translate(0); }
+}
+
+@keyframes glitchRed {
+  0%, 19%  { opacity: 0; }
+  20%      { opacity: 1; transform: translate(-6px, 0);   clip-path: inset(15% 0 55% 0); }
+  21%      { opacity: 1; transform: translate(4px);       clip-path: inset(60% 0 10% 0); }
+  22%      { opacity: 0; }
+  50%      { opacity: 1; transform: translate(5px, 1px);  clip-path: inset(30% 0 40% 0); }
+  51%      { opacity: 0; }
+  75%      { opacity: 1; transform: translate(-7px, 0);   clip-path: inset(5%  0 70% 0); }
+  76%      { opacity: 1; transform: translate(5px, -1px); clip-path: inset(50% 0 20% 0); }
+  77%      { opacity: 1; transform: translate(-3px);      clip-path: inset(75% 0 5%  0); }
+  78%      { opacity: 0; }
+  100%     { opacity: 0; }
+}
+
+@keyframes glitchCyan {
+  0%, 19%  { opacity: 0; }
+  20%      { opacity: 1; transform: translate(6px, -1px); clip-path: inset(55% 0 15% 0); }
+  21%      { opacity: 1; transform: translate(-4px, 1px); clip-path: inset(10% 0 60% 0); }
+  22%      { opacity: 0; }
+  50%      { opacity: 1; transform: translate(-5px, 0);   clip-path: inset(65% 0 5%  0); }
+  51%      { opacity: 0; }
+  75%      { opacity: 1; transform: translate(7px, 1px);  clip-path: inset(20% 0 55% 0); }
+  76%      { opacity: 1; transform: translate(-5px, 2px); clip-path: inset(70% 0 8%  0); }
+  77%      { opacity: 1; transform: translate(3px, -1px); clip-path: inset(35% 0 40% 0); }
+  78%      { opacity: 0; }
+  100%     { opacity: 0; }
+}
+
+/* --- Subtitle --- */
+.splash-sub {
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-top: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.splash-sub.visible {
+  opacity: 1;
 }
